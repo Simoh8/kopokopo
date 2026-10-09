@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KopoKop Finder - Financial Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brand-icon">💰</div>
+                <div class="brand-name">KopoKop Finder</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-target="upload-view">
+                    <i class="fas fa-upload"></i> Upload
+                </a>
+                <a href="#" class="nav-item" data-target="dashboard-view" id="nav-dashboard" style="display: none;">
+                    <i class="fas fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-target="transactions-view" id="nav-transactions" style="display: none;">
+                    <i class="fas fa-list"></i> Transactions
+                </a>
+                <a href="#" class="nav-item" data-target="customers-view" id="nav-customers" style="display: none;">
+                    <i class="fas fa-users"></i> Customers
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="header-title" id="current-view-title">Upload Data</div>
+                <div class="upload-status" id="upload-status">
+                    <span class="status-indicator"></span> No file loaded
+                </div>
+            </header>
+
+            <!-- Views Container -->
+            <div class="views-container">
+                
+                <!-- Upload View -->
+                <div id="upload-view" class="view active">
+                    <div class="upload-container">
+                        <div class="upload-area" id="drop-zone">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h3>Upload your Transactions File</h3>
+                            <p>Drag and drop your KopoKop statement (CSV, Excel, TSV) here</p>
+                            <span class="divider">or</span>
+                            <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                            <input type="file" id="file-input" accept=".csv,.xlsx,.xls,.tsv,.txt" style="display: none;">
+                        </div>
+                        <div id="upload-progress" class="upload-progress hidden">
+                            <div class="spinner"></div>
+                            <p>Processing data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="view">
+                    <div class="summary-cards">
+                        <div class="card summary-card gradient-primary">
+                            <div class="card-icon"><i class="fas fa-receipt"></i></div>
+                            <div class="card-details">
+                                <h4>Total Transactions</h4>
+                                <div class="value" id="stat-total-tx">0</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card gradient-success">
+                            <div class="card-icon"><i class="fas fa-arrow-down"></i></div>
+                            <div class="card-details">
+                                <h4>Money Received</h4>
+                                <div class="value" id="stat-credit">KSh 0.00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card gradient-danger">
+                            <div class="card-icon"><i class="fas fa-arrow-up"></i></div>
+                            <div class="card-details">
+                                <h4>Money Paid Out</h4>
+                                <div class="value" id="stat-debit">KSh 0.00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card gradient-warning">
+                            <div class="card-icon"><i class="fas fa-percentage"></i></div>
+                            <div class="card-details">
+                                <h4>Fees</h4>
+                                <div class="value" id="stat-fees">KSh 0.00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card gradient-info">
+                            <div class="card-icon"><i class="fas fa-wallet"></i></div>
+                            <div class="card-details">
+                                <h4>Net Balance</h4>
+                                <div class="value" id="stat-net">KSh 0.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-charts">
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3>Transaction Overview</h3>
+                                <button class="btn btn-sm btn-outline" onclick="app.navigateTo('transactions')">View All</button>
+                            </div>
+                            <!-- Search embedded for quick access -->
+                            <div class="quick-search">
+                                <input type="text" id="quick-keyword" placeholder="Search keyword or reference..." class="input-field">
+                                <button class="btn btn-primary" onclick="app.quickSearch()">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transactions View -->
+                <div id="transactions-view" class="view">
+                    <div class="search-panel card">
+                        <div class="panel-header" id="filter-toggle">
+                            <h3><i class="fas fa-filter"></i> Advanced Search & Filters</h3>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="panel-body" id="filter-body">
+                            <form id="search-form" class="search-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Customer Name</label>
+                                        <input type="text" name="customer_name" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Reference</label>
+                                        <input type="text" name="reference" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Keyword / Description</label>
+                                        <input type="text" name="keyword" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Exact Amount</label>
+                                        <input type="number" step="0.01" name="exact_amount" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Min Amount</label>
+                                        <input type="number" step="0.01" name="min_amount" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Max Amount</label>
+                                        <input type="number" step="0.01" name="max_amount" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date From</label>
+                                        <input type="date" name="date_from" class="input-field">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date To</label>
+                                        <input type="date" name="date_to" class="input-field">
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="logic-toggle">
+                                        <span>Match:</span>
+                                        <label class="switch">
+                                            <input type="checkbox" id="logic-toggle" name="logic_toggle" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <span id="logic-label">AND</span>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-outline" id="btn-clear">Clear</button>
+                                        <button type="button" class="btn btn-secondary" id="btn-save-search">Save Search</button>
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="saved-searches" id="saved-searches-container">
+                                <!-- Chips will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card table-card">
+                        <div class="table-header">
+                            <div class="results-info" id="results-info">Showing 0 results</div>
+                            <div class="export-actions">
+                                <button class="btn btn-sm btn-outline" id="btn-export-csv"><i class="fas fa-file-csv"></i> CSV</button>
+                                <button class="btn btn-sm btn-outline" id="btn-export-excel"><i class="fas fa-file-excel"></i> Excel</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="Date">Date <i class="fas fa-sort"></i></th>
+                                        <th data-sort="Description">Description <i class="fas fa-sort"></i></th>
+                                        <th data-sort="Reference">Reference <i class="fas fa-sort"></i></th>
+                                        <th data-sort="Debit">Debit <i class="fas fa-sort"></i></th>
+                                        <th data-sort="Credit">Credit <i class="fas fa-sort"></i></th>
+                                        <th data-sort="Balance">Balance <i class="fas fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-body">
+                                    <!-- Rows here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination" id="pagination-controls">
+                            <!-- Pagination here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers View -->
+                <div id="customers-view" class="view">
+                    <div class="card table-card">
+                        <div class="table-header">
+                            <h3>Customer Analytics</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="customers-table">
+                                <thead>
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>Total Payments</th>
+                                        <th>Total Received</th>
+                                        <th>Last Payment Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customers-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div class="modal-overlay" id="tx-modal">
+        <div class="modal-content glass-modal">
+            <div class="modal-header">
+                <h2>Transaction Details</h2>
+                <button class="close-modal" id="close-tx-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="tx-modal-body">
+                <!-- Details injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Search Prompt Modal -->
+    <div class="modal-overlay" id="save-search-modal">
+        <div class="modal-content glass-modal modal-sm">
+            <div class="modal-header">
+                <h2>Save Search</h2>
+                <button class="close-modal" id="close-save-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Search Name</label>
+                    <input type="text" id="save-search-name" class="input-field" placeholder="e.g. High Value Deposits">
+                </div>
+                <button class="btn btn-primary w-100 mt-3" id="btn-confirm-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

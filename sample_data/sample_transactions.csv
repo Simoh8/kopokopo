@@ -1,0 +1,33 @@
+Date,Description,Account number,Reference,Debit,Credit,Balance
+2024-08-01,Payment received from Karen Wanjiku via Till 123456,0712345678,TXN20240801001,0.00,2700.00,7700.00
+2024-08-01,Transaction fee for payment from Karen Wanjiku,0712345678,TXN20240801002,35.00,0.00,7665.00
+2024-08-03,Payment received from John Mwangi via Till 123456,0722112233,TXN20240803001,0.00,4500.00,12165.00
+2024-08-03,Transaction fee for payment from John Mwangi,0722112233,TXN20240803002,55.00,0.00,12110.00
+2024-08-05,Payment received from Arbor Place Limited via Till 123456,0733998877,TXN20240805001,0.00,18500.00,30610.00
+2024-08-05,Transaction fee for payment from Arbor Place Limited,0733998877,TXN20240805002,120.00,0.00,30490.00
+2024-08-07,Cash withdrawal to bank account,1234567890,TXN20240807001,25000.00,0.00,5490.00
+2024-08-10,Payment received from Grace Akinyi via Till 123456,0701234567,TXN20240810001,0.00,3200.00,8690.00
+2024-08-10,Transaction fee for payment from Grace Akinyi,0701234567,TXN20240810002,40.00,0.00,8650.00
+2024-08-14,Payment received from David Ochieng via Till 123456,0715678901,TXN20240814001,0.00,12000.00,20650.00
+2024-08-14,Transaction fee for payment from David Ochieng,0715678901,TXN20240814002,95.00,0.00,20555.00
+2024-08-18,Payment received from Karen Wanjiku via Till 123456,0712345678,TXN20240818001,0.00,5400.00,25955.00
+2024-08-18,Transaction fee for payment from Karen Wanjiku,0712345678,TXN20240818002,60.00,0.00,25895.00
+2024-08-22,Payment received from Abor Holdings via Till 123456,0728345678,TXN20240822001,0.00,35000.00,60895.00
+2024-08-22,Transaction fee for payment from Abor Holdings,0728345678,TXN20240822002,150.00,0.00,60745.00
+2024-08-25,Settlement to bank account 1234567890,1234567890,TXN20240825001,50000.00,0.00,10745.00
+2024-08-28,Payment received from Peter Kamau via Till 123456,0741239876,TXN20240828001,0.00,1500.00,12245.00
+2024-08-28,Transaction fee for payment from Peter Kamau,0741239876,TXN20240828002,30.00,0.00,12215.00
+2024-09-02,Payment received from Arbor Place Limited via Till 123456,0733998877,TXN20240902001,0.00,22000.00,34215.00
+2024-09-02,Transaction fee for payment from Arbor Place Limited,0733998877,TXN20240902002,130.00,0.00,34085.00
+2024-09-06,Payment received from Karen Wanjiku via Till 123456,0712345678,TXN20240906001,0.00,3100.00,37185.00
+2024-09-06,Transaction fee for payment from Karen Wanjiku,0712345678,TXN20240906002,40.00,0.00,37145.00
+2024-09-10,Payment received from Faith Chebet via Till 123456,0799887766,TXN20240910001,0.00,850.00,37995.00
+2024-09-10,Transaction fee for payment from Faith Chebet,0799887766,TXN20240910002,30.00,0.00,37965.00
+2024-09-15,Settlement to bank account 1234567890,1234567890,TXN20240915001,30000.00,0.00,7965.00
+2024-09-18,Payment received from John Mwangi via Till 123456,0722112233,TXN20240918001,0.00,6200.00,14165.00
+2024-09-18,Transaction fee for payment from John Mwangi,0722112233,TXN20240918002,65.00,0.00,14100.00
+2024-09-22,Payment received from Arbor Place Limited via Till 123456,0733998877,TXN20240922001,0.00,15000.00,29100.00
+2024-09-22,Transaction fee for payment from Arbor Place Limited,0733998877,TXN20240922002,110.00,0.00,28990.00
+2024-09-26,Payment received from Karen Wanjiku via Till 123456,0712345678,TXN20240926001,0.00,4200.00,33190.00
+2024-09-26,Transaction fee for payment from Karen Wanjiku,0712345678,TXN20240926002,50.00,0.00,33140.00
+2024-10-01,Cash withdrawal to bank account,1234567890,TXN20241001001,25000.00,0.00,8140.00
